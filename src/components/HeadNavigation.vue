@@ -7,7 +7,11 @@
             v-html="$t('head.title')"
         ></div>
         <div class="right">
-            <div class="logo" :class="[{ 'logo-shifted': logoShifted }, $store.state.mediaTag]" @click.stop="onClickLogo">
+            <div
+                class="logo"
+                :class="[{ 'logo-shifted': logoShifted }, $store.state.mediaTag]"
+                @click.stop="onClickLogo"
+            >
                 <div class="image"></div>
             </div>
             <div class="legal" :class="[{ 'logo-shifted': logoShifted }, $store.state.mediaTag]" v-html="right"></div>
@@ -157,8 +161,8 @@ export default {
         }
         .logo {
             float: right;
-            width: 175px;
-            height: 56px;
+            width: 148px;
+            height: 48px;
             background-color: #f9f9f1;
             border-radius: 0 0 0 10px;
             cursor: pointer;
@@ -167,12 +171,12 @@ export default {
                 position: absolute;
                 float: unset;
                 right: 0px;
-                transform: scale(0.85);
+                // transform: scale(0.85);
                 transform-origin: right top;
             }
             // TODO see top
             @media (max-width: 530px) {
-                transform: scale(0.85);
+                // transform: scale(0.85);
                 transform-origin: right top;
                 margin-right: 0px;
                 transition: margin-right 200ms;
@@ -187,8 +191,8 @@ export default {
                 background-image: url($url);
                 background-repeat: no-repeat;
                 background-size: contain;
-                width: 160px;
-                height: 60px;
+                width: 130px;
+                height: inherit;
                 margin: 5px;
             }
         }
