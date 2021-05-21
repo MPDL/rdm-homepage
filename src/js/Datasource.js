@@ -78,6 +78,11 @@ function Datasource() {
         return axios.create().post(getPath(api), data, options)
     }
 
+    const get = async (api, data = {}, options = {}) => {
+        // data.token = globals.getAdminToken()
+        return axios.create().get(getPath(api), data, options)
+    }
+
     const getValidI18nKey = i18nKey => {
         const trns = _.get(config.translations, `${globals.getLocale()}.${i18nKey}.__0`)
         return _.isString(trns) ? `${i18nKey}.__0` : i18nKey
@@ -137,7 +142,9 @@ function Datasource() {
         if (config.structure) {
             return config.structure
         }
-        return post('/structure')
+        // 'get' is used for flat file mode here, as some servers dont allow 'post'.
+        // in cms mode, the auth and reload ist done via post in 'cmsUpdateTranslations'
+        return get('/structure')
             .then(res => {
                 updateConfig(res.data)
                 config.structure = generateStructure(res.data)
@@ -149,7 +156,9 @@ function Datasource() {
     this.getStructure = getStructure
 
     const getTranslations = () => {
-        return post('/translations')
+        // 'get' is used for flat file mode here, as some servers dont allow 'post'.
+        // in cms mode, the auth and reload ist done via post in 'cmsUpdateTranslations'
+        return get('/translations')
             .then(res => {
                 config.translations = res.data // TODO merge
                 return res.data
